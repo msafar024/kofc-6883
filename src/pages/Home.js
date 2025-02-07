@@ -38,7 +38,7 @@ const Home = () => {
     {
       title: 'Charity',
       description: 'Charity is at the heart of our work and our faith — and it always has been.',
-      icon: '🤲',
+      icon: '❤️‍🔥',
       color: 'from-kofc-red to-kofc-gold'
     },
     {
