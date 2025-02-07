@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react';
 import { motion, useAnimation } from 'framer-motion';
+import { Link } from 'react-router-dom';
+import { FaArrowRight } from 'react-icons/fa';
 
 const Home = () => {
   const controls = useAnimation();
@@ -121,14 +123,18 @@ const Home = () => {
                 Faith • Service • Brotherhood
               </motion.p>
 
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="bg-gradient-to-r from-kofc-red to-kofc-blue text-white font-trajan px-8 py-3 rounded-md text-lg relative overflow-hidden group"
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.4 }}
               >
-                <span className="relative z-10">Join Our Brotherhood</span>
-                <div className="absolute inset-0 bg-gradient-to-r from-kofc-blue to-kofc-red opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-              </motion.button>
+                <Link 
+                  to="/membership"
+                  className="inline-block bg-kofc-gold hover:bg-kofc-gold/90 text-kofc-dark px-8 py-3 rounded-full font-semibold text-lg transition-colors duration-300 transform hover:scale-105"
+                >
+                  Join Us
+                </Link>
+              </motion.div>
             </motion.div>
           </div>
         </div>
@@ -195,13 +201,13 @@ const Home = () => {
             <p className="text-xl font-garamond mb-8 text-white">
               Become part of a community dedicated to making a difference through faith and service.
             </p>
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="bg-white text-kofc-blue font-trajan px-8 py-3 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300"
+            <Link
+              to="/membership"
+              className="mt-8 inline-flex items-center text-kofc-gold hover:text-white transition-colors duration-300"
             >
-              Learn More About Membership
-            </motion.button>
+              <span className="mr-2">Join the Brotherhood</span>
+              <FaArrowRight className="h-4 w-4" />
+            </Link>
           </motion.div>
         </div>
       </section>

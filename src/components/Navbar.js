@@ -65,8 +65,8 @@ const Navbar = () => {
               </Link>
             ))}
             <Link
-              to="/join"
-              className="bg-kofc-red hover:bg-red-700 text-white px-4 py-2 rounded-md transition-colors duration-200"
+              to="/membership"
+              className="bg-kofc-red hover:bg-kofc-red/90 text-white px-6 py-2 rounded-full font-semibold transition-all duration-300 transform hover:scale-105"
             >
               Join Us
             </Link>
@@ -103,7 +103,7 @@ const Navbar = () => {
               </Link>
             ))}
             <Link
-              to="/join"
+              to="/membership"
               className="block px-3 py-2 text-center bg-kofc-red hover:bg-red-700 text-white rounded-md transition-colors duration-200"
               onClick={() => setIsOpen(false)}
             >
