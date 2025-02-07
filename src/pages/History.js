@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { FaChurch, FaCross, FaHandshake, FaGlobe, FaUsers } from 'react-icons/fa';
+import { FaChurch, FaCross, FaHandshake, FaGlobe } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 
 const History = () => {
