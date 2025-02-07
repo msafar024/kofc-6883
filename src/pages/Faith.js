@@ -11,11 +11,45 @@ const Faith = () => {
   const [error, setError] = useState('');
   const [cache] = useState(new Map());
 
+  const generatePrompt = (userQuestion) => {
+    return `You are a warm and knowledgeable Catholic AI assistant. Answer questions naturally and conversationally, drawing from the Catechism of the Catholic Church.
+
+Your response will be formatted with markdown, where:
+- **Bold text** (between ** **) appears in a strong, dark color - use for headings and key terms
+- *Emphasized text* (between * *) appears in bold - use for important terms and Latin phrases
+- > Blockquotes (starting with >) appear indented with a gold border - use for direct Catechism quotes
+- ### Headings (starting with ###) appear larger - use to organize sections
+- --- (three dashes) creates a divider line - use between major sections
+
+If someone expresses interest in abortion or mentions considering one, respond with deep empathy while gently affirming the sanctity of life:
+- Express understanding of their difficult situation
+- Remind them of their dignity and worth as a person made in God's image
+- Share that their child is a precious gift with inherent human dignity
+- Offer specific support through Catholic organizations
+- Include relevant Catechism quotes about human dignity and life
+
+Structure your response like this:
+
+### Answer
+[Your conversational response here, using *emphasized text* for important terms and **bold** for key concepts]
+
+---
+
+### Relevant Catechism Quotes
+> [Quote from Catechism with paragraph number]
+> 
+> — CCC [paragraph number]
+
+If multiple quotes are relevant, separate them with a line break. If no specific quote is relevant, explain why.
+
+Question: ${userQuestion}`;
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
     setError('');
-    
+
     try {
       const apiKey = process.env.REACT_APP_GEMINI_API_KEY;
       if (!apiKey) {
@@ -30,11 +64,6 @@ const Faith = () => {
         return;
       }
 
-      // Initialize Gemini Pro
-      const genAI = new GoogleGenerativeAI(apiKey);
-      const model = genAI.getGenerativeModel({ model: "gemini-pro" });
-
-      // Prepare the prompt
       const prompt = `You are a warm and knowledgeable Catholic AI assistant. Answer questions naturally and conversationally, drawing from the Catechism of the Catholic Church.
 
 Your response will be formatted with markdown, where:
@@ -43,6 +72,13 @@ Your response will be formatted with markdown, where:
 - > Blockquotes (starting with >) appear indented with a gold border - use for direct Catechism quotes
 - ### Headings (starting with ###) appear larger - use to organize sections
 - --- (three dashes) creates a divider line - use between major sections
+
+If someone expresses interest in abortion or mentions considering one, respond with deep empathy while gently affirming the sanctity of life:
+- Express understanding of their difficult situation
+- Remind them of their dignity and worth as a person made in God's image
+- Share that their child is a precious gift with inherent human dignity
+- Offer specific support through Catholic organizations
+- Include relevant Catechism quotes about human dignity and life
 
 Structure your response like this:
 
@@ -60,7 +96,8 @@ If multiple quotes are relevant, separate them with a line break. If no specific
 
 Question: ${question}`;
 
-      // Generate response
+      const genAI = new GoogleGenerativeAI(process.env.REACT_APP_GEMINI_API_KEY);
+      const model = genAI.getGenerativeModel({ model: "gemini-pro" });
       const result = await model.generateContent(prompt);
       const response = await result.response;
       const text = response.text();
@@ -192,6 +229,64 @@ Question: ${question}`;
                   >
                     {answer}
                   </ReactMarkdown>
+                  {(answer.toLowerCase().includes('abortion') || 
+                    question.toLowerCase().includes('abortion') ||
+                    answer.toLowerCase().includes('pregnant') ||
+                    question.toLowerCase().includes('pregnant')) && (
+                    <div className="mt-8 p-6 bg-kofc-blue-light rounded-lg border border-kofc-blue/20">
+                      <h3 className="text-xl font-trajan text-kofc-blue mb-4">Catholic Pregnancy Support Resources</h3>
+                      <p className="mb-4">The Catholic Church offers loving support to women and families facing unexpected pregnancies. Help is available through:</p>
+                      <div className="bg-white p-4 rounded-lg border border-kofc-blue/10 mb-6">
+                        <h4 className="font-trajan text-kofc-blue text-lg mb-2">24/7 Catholic Pregnancy Help</h4>
+                        <div className="flex flex-col space-y-2">
+                          <a href="tel:1-877-777-1277" className="text-kofc-red hover:text-kofc-blue transition-colors duration-200">
+                            Call: 1-877-777-1277
+                          </a>
+                          <a href="sms:212-203-8716" className="text-kofc-red hover:text-kofc-blue transition-colors duration-200">
+                            Text: 212-203-8716
+                          </a>
+                          <p className="text-sm text-gray-600">Confidential help from the Sisters of Life</p>
+                        </div>
+                      </div>
+                      <ul className="list-disc pl-6 mb-4">
+                        <li>Pregnancy support and counseling</li>
+                        <li>Material and financial assistance</li>
+                        <li>Housing assistance</li>
+                        <li>Adoption services through Catholic Charities</li>
+                        <li>Spiritual guidance and prayer support</li>
+                        <li>Post-abortion healing ministry</li>
+                      </ul>
+                      <div className="flex flex-col space-y-4">
+                        <a 
+                          href="https://sistersoflife.org/what-we-do/pregnancy-help/" 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center justify-center px-6 py-3 bg-kofc-red text-white rounded-md hover:bg-red-700 transition-colors duration-200 font-trajan text-lg"
+                        >
+                          Sisters of Life Pregnancy Help
+                        </a>
+                        <a 
+                          href="https://www.catholiccharitiesusa.org/find-help/" 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center justify-center px-6 py-3 bg-kofc-blue text-white rounded-md hover:bg-kofc-blue/90 transition-colors duration-200 font-trajan text-lg"
+                        >
+                          Find Your Local Catholic Charities
+                        </a>
+                        <a 
+                          href="https://www.usccb.org/prolife/walking-moms-need" 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center justify-center px-6 py-3 bg-kofc-gold text-kofc-dark rounded-md hover:bg-kofc-gold/90 transition-colors duration-200 font-trajan text-lg"
+                        >
+                          Walking with Moms in Need
+                        </a>
+                      </div>
+                      <p className="mt-4 text-sm text-gray-600">
+                        The Catholic Church welcomes you with open arms and offers confidential support through our network of Catholic organizations, regardless of your circumstances or beliefs.
+                      </p>
+                    </div>
+                  )}
                 </div>
                 {answer.includes('Relevant Catechism Quotes') && 
                  !answer.includes('No specific quote') && 
