@@ -6,6 +6,7 @@ import Home from './pages/Home';
 import About from './pages/About';
 import History from './pages/History';
 import Membership from './pages/Membership';
+import Gallery from './pages/Gallery';
 import ScrollToTop from './components/ScrollToTop';
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
             <Route path="/about" element={<About />} />
             <Route path="/history" element={<History />} />
             <Route path="/membership" element={<Membership />} />
+            <Route path="/gallery" element={<Gallery />} />
           </Routes>
         </main>
         <Footer />
