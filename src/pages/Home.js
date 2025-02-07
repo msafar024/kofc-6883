@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { FaArrowRight } from 'react-icons/fa';
+import { motion } from 'framer-motion';
 
 const Home = () => {
   const pillars = [
@@ -45,7 +46,18 @@ const Home = () => {
 
         <div className="relative min-h-screen flex flex-col justify-center items-center text-center px-4 pt-20">
           <div className="flex-1 flex flex-col justify-center items-center max-w-4xl">
-            <div className="mb-8">
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ 
+                duration: 1.5,
+                type: "spring",
+                bounce: 0.2,
+                mass: 2,
+                damping: 15
+              }}
+              className="mb-8"
+            >
               <div className="inline-block">
                 <div className="w-32 h-32 relative">
                   <div className="absolute inset-0 bg-gradient-to-r from-kofc-gold via-kofc-red to-kofc-blue p-2 rounded-full">
@@ -59,30 +71,57 @@ const Home = () => {
                   </div>
                 </div>
               </div>
-            </div>
+            </motion.div>
 
-            <h1 className="text-5xl md:text-7xl font-trajan text-white mb-6 gothic-text-shadow">
-              Knights of Columbus
-              <span className="block text-kofc-gold mt-2">Council 6883</span>
-            </h1>
-
-            <p className="text-xl md:text-2xl text-white font-garamond mb-8 tracking-wide">
-              Faith • Service • Brotherhood
-            </p>
-
-            <Link 
-              to="/membership"
-              className="inline-block bg-kofc-gold hover:bg-kofc-gold/90 text-kofc-dark px-8 py-3 rounded-full font-semibold text-lg transition-colors duration-300 transform hover:scale-105"
+            <motion.div
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ 
+                duration: 1,
+                type: "spring",
+                bounce: 0.3
+              }}
             >
-              Join Us
-            </Link>
-          </div>
-        </div>
+              <motion.h1 
+                className="text-5xl md:text-7xl font-trajan text-white mb-6 gothic-text-shadow"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.3 }}
+              >
+                Knights of Columbus
+                <motion.span 
+                  className="block text-kofc-gold mt-2"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, delay: 0.6 }}
+                >
+                  Council 6883
+                </motion.span>
+              </motion.h1>
 
-        {/* Scroll Indicator */}
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2">
-          <div className="w-6 h-10 border-2 border-white rounded-full flex justify-center">
-            <div className="w-1 h-3 bg-white rounded-full mt-2" />
+              <motion.p 
+                className="text-xl md:text-2xl text-white font-garamond mb-8 tracking-wide"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.9 }}
+              >
+                Faith • Service • Brotherhood
+              </motion.p>
+
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 1.2 }}
+                whileHover={{ scale: 1.05 }}
+              >
+                <Link 
+                  to="/membership"
+                  className="inline-block bg-kofc-gold hover:bg-kofc-gold/90 text-kofc-dark px-8 py-3 rounded-full font-semibold text-lg transition-colors duration-300"
+                >
+                  Join Us
+                </Link>
+              </motion.div>
+            </motion.div>
           </div>
         </div>
       </div>
