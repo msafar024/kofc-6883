@@ -193,9 +193,13 @@ Question: ${question}`;
                     {answer}
                   </ReactMarkdown>
                 </div>
-                <div className="mt-4 text-sm text-gray-500">
-                  Source: Catechism of the Catholic Church
-                </div>
+                {answer.includes('Relevant Catechism Quotes') && 
+                 !answer.includes('No specific quote') && 
+                 !answer.includes('N/A') && (
+                  <div className="mt-4 text-sm text-gray-500">
+                    Source: Catechism of the Catholic Church
+                  </div>
+                )}
               </motion.div>
             )}
           </motion.div>
