@@ -1,0 +1,20 @@
+{
+  "short_name": "KofC 6883",
+  "name": "Knights of Columbus Council 6883",
+  "icons": [
+    {
+      "src": "favicon.ico",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "images/kofc-logo.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#1E1656",
+  "background_color": "#1C1C1C"
+}

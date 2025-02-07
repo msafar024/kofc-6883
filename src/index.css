@@ -1,0 +1,184 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --kofc-blue-rgb: 30, 22, 86;
+  --kofc-gold-rgb: 255, 199, 44;
+  --kofc-red-rgb: 204, 0, 1;
+  --kofc-dark-rgb: 28, 28, 28;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;600;700&display=swap');
+
+/* You'll need to add Trajan Pro font to your project assets */
+@font-face {
+  font-family: 'Trajan Pro';
+  src: local('Trajan Pro');
+}
+
+.bg-hero {
+  background-color: theme('colors.kofc-dark');
+  background-image: 
+    linear-gradient(to bottom right, 
+      rgba(var(--kofc-blue-rgb), 0.9),
+      rgba(var(--kofc-dark-rgb), 0.9)
+    ),
+    url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M50 0 L100 100 L0 100 Z' fill='white' fill-opacity='0.05'/%3E%3C/svg%3E");
+}
+
+.bg-pattern {
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%239C92AC' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+
+.gothic-text-shadow {
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.gothic-arch-overlay {
+  background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M50 0 L100 100 L0 100 Z' fill='white' fill-opacity='0.05'/%3E%3C/svg%3E");
+}
+
+/* Animated gradient backgrounds */
+.animated-gradient {
+  background: linear-gradient(-45deg, 
+    rgba(var(--kofc-blue-rgb), 0.8),
+    rgba(var(--kofc-gold-rgb), 0.8),
+    rgba(var(--kofc-red-rgb), 0.8)
+  );
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Stained glass effect */
+.stained-glass {
+  position: relative;
+  background: linear-gradient(45deg, 
+    rgba(205, 32, 39, 0.2),
+    rgba(0, 61, 165, 0.2),
+    rgba(196, 180, 84, 0.2)
+  );
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Gothic button styles */
+.gothic-button {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.gothic-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  transition: all 0.5s ease;
+}
+
+.gothic-button:hover::before {
+  left: 100%;
+}
+
+/* Cathedral Background */
+.cathedral-bg {
+  background-color: #1C1C1C;
+  background-image: 
+    linear-gradient(0deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 100%),
+    repeating-linear-gradient(
+      45deg,
+      rgba(var(--kofc-gold-rgb), 0.05) 0,
+      rgba(var(--kofc-gold-rgb), 0.05) 1px,
+      transparent 0,
+      transparent 50%
+    );
+  background-size: 100% 100%, 30px 30px;
+  position: relative;
+  overflow: hidden;
+}
+
+.cathedral-pillars {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: space-around;
+  perspective: 1000px;
+  opacity: 0.3;
+}
+
+.cathedral-pillar {
+  width: 40px;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    rgba(var(--kofc-blue-rgb), 0.2),
+    rgba(var(--kofc-gold-rgb), 0.1),
+    rgba(var(--kofc-blue-rgb), 0.2)
+  );
+  transform-style: preserve-3d;
+}
+
+.cathedral-arches {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform-style: preserve-3d;
+  perspective: 1000px;
+  opacity: 0.2;
+}
+
+.cathedral-arch {
+  position: absolute;
+  width: 200px;
+  height: 300px;
+  border: 2px solid rgba(var(--kofc-gold-rgb), 0.1);
+  border-radius: 100% 100% 0 0;
+  transform-style: preserve-3d;
+}
+
+.stained-glass {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: 
+    radial-gradient(
+      circle at var(--x, 50%) var(--y, 50%),
+      rgba(var(--kofc-red-rgb), 0.1),
+      rgba(var(--kofc-blue-rgb), 0.1) 40%,
+      rgba(var(--kofc-gold-rgb), 0.1) 60%,
+      transparent 80%
+    );
+  filter: blur(40px);
+  mix-blend-mode: screen;
+  pointer-events: none;
+  opacity: 0.3;
+}
