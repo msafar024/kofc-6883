@@ -133,15 +133,15 @@ const About = () => {
               </div>
             </motion.div>
             <motion.div
-              className="relative h-[300px] md:h-[400px] rounded-lg overflow-hidden"
+              className="relative h-[300px] md:h-[400px] rounded-lg overflow-hidden bg-white"
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6 }}
             >
               <img
-                src="/images/knights-in-service.jpg"
-                alt="Knights of Columbus in Service"
-                className="absolute inset-0 w-full h-full object-cover rounded-lg"
+                src="/images/kofc-logo.png"
+                alt="Knights of Columbus Logo"
+                className="absolute inset-0 w-full h-full object-contain p-8"
               />
             </motion.div>
           </div>
