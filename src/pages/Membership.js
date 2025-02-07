@@ -59,16 +59,16 @@ const Membership = () => {
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        className="relative h-[40vh] bg-gradient-to-b from-kofc-dark to-kofc-blue/90 overflow-hidden"
+        className="relative h-[50vh] bg-gradient-to-b from-kofc-dark to-kofc-blue/90 overflow-hidden pt-32"
       >
         <div className="absolute inset-0 bg-pattern opacity-20" />
         <div className="absolute inset-0 flex items-center justify-center px-4">
-          <div className="text-center">
+          <div className="text-center max-w-4xl mx-auto">
             <motion.h1
               initial={{ y: 20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.6 }}
-              className="text-4xl md:text-5xl lg:text-6xl font-trajan text-white mb-4"
+              className="text-5xl md:text-6xl lg:text-7xl font-trajan text-white mb-6"
             >
               Join Our Brotherhood
             </motion.h1>
@@ -76,9 +76,9 @@ const Membership = () => {
               initial={{ y: 20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="text-xl text-gray-200 max-w-2xl mx-auto"
+              className="text-xl md:text-2xl text-gray-200 max-w-3xl mx-auto leading-relaxed"
             >
-              Become part of a community dedicated to faith, charity, and fraternal service
+              Become part of a community dedicated to faith, charity, and fraternal service. Together, we make a difference.
             </motion.p>
           </div>
         </div>
