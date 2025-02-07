@@ -1,39 +1,8 @@
-import React, { useEffect } from 'react';
-import { motion, useAnimation } from 'framer-motion';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { FaArrowRight } from 'react-icons/fa';
 
 const Home = () => {
-  const controls = useAnimation();
-
-  useEffect(() => {
-    controls.start('visible');
-  }, [controls]);
-
-  const stainedGlassVariants = {
-    hidden: { opacity: 0, scale: 0.8 },
-    visible: {
-      opacity: 1,
-      scale: 1,
-      transition: {
-        duration: 1.2,
-        ease: "easeOut"
-      }
-    }
-  };
-
-  const textRevealVariants = {
-    hidden: { y: 50, opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1,
-      transition: {
-        duration: 0.8,
-        ease: "easeOut"
-      }
-    }
-  };
-
   const pillars = [
     {
       title: 'Charity',
@@ -76,100 +45,58 @@ const Home = () => {
 
         <div className="relative min-h-screen flex flex-col justify-center items-center text-center px-4 pt-20">
           <div className="flex-1 flex flex-col justify-center items-center max-w-4xl">
-            <motion.div
-              initial="hidden"
-              animate="visible"
-              variants={{
-                hidden: { opacity: 0 },
-                visible: {
-                  opacity: 1,
-                  transition: {
-                    staggerChildren: 0.3
-                  }
-                }
-              }}
-            >
-              <motion.div
-                variants={stainedGlassVariants}
-                className="mb-8"
-              >
-                <div className="inline-block">
-                  <div className="w-32 h-32 relative">
-                    <div className="absolute inset-0 bg-gradient-to-r from-kofc-gold via-kofc-red to-kofc-blue p-2 rounded-full">
-                      <div className="w-full h-full bg-white rounded-full overflow-hidden">
-                        <img
-                          src="/images/kofc-logo.png"
-                          alt="Knights of Columbus"
-                          className="w-full h-full object-contain p-2"
-                        />
-                      </div>
+            <div className="mb-8">
+              <div className="inline-block">
+                <div className="w-32 h-32 relative">
+                  <div className="absolute inset-0 bg-gradient-to-r from-kofc-gold via-kofc-red to-kofc-blue p-2 rounded-full">
+                    <div className="w-full h-full bg-white rounded-full overflow-hidden">
+                      <img
+                        src="/images/kofc-logo.png"
+                        alt="Knights of Columbus"
+                        className="w-full h-full object-contain p-2"
+                      />
                     </div>
                   </div>
                 </div>
-              </motion.div>
+              </div>
+            </div>
 
-              <motion.h1
-                variants={textRevealVariants}
-                className="text-5xl md:text-7xl font-trajan text-white mb-6 gothic-text-shadow"
-              >
-                Knights of Columbus
-                <span className="block text-kofc-gold mt-2">Council 6883</span>
-              </motion.h1>
+            <h1 className="text-5xl md:text-7xl font-trajan text-white mb-6 gothic-text-shadow">
+              Knights of Columbus
+              <span className="block text-kofc-gold mt-2">Council 6883</span>
+            </h1>
 
-              <motion.p
-                variants={textRevealVariants}
-                className="text-xl md:text-2xl text-white font-garamond mb-8 tracking-wide"
-              >
-                Faith • Service • Brotherhood
-              </motion.p>
+            <p className="text-xl md:text-2xl text-white font-garamond mb-8 tracking-wide">
+              Faith • Service • Brotherhood
+            </p>
 
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.4 }}
-              >
-                <Link 
-                  to="/membership"
-                  className="inline-block bg-kofc-gold hover:bg-kofc-gold/90 text-kofc-dark px-8 py-3 rounded-full font-semibold text-lg transition-colors duration-300 transform hover:scale-105"
-                >
-                  Join Us
-                </Link>
-              </motion.div>
-            </motion.div>
+            <Link 
+              to="/membership"
+              className="inline-block bg-kofc-gold hover:bg-kofc-gold/90 text-kofc-dark px-8 py-3 rounded-full font-semibold text-lg transition-colors duration-300 transform hover:scale-105"
+            >
+              Join Us
+            </Link>
           </div>
         </div>
 
         {/* Scroll Indicator */}
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 2, duration: 1, repeat: Infinity, repeatType: "reverse" }}
-          className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
-        >
+        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2">
           <div className="w-6 h-10 border-2 border-white rounded-full flex justify-center">
             <div className="w-1 h-3 bg-white rounded-full mt-2" />
           </div>
-        </motion.div>
+        </div>
       </div>
 
       {/* Four Pillars Section */}
       <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="text-4xl font-trajan text-center mb-12 text-kofc-blue"
-          >
+          <h2 className="text-4xl font-trajan text-center mb-12 text-kofc-blue">
             The Four Pillars
-          </motion.h2>
+          </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {pillars.map((pillar, index) => (
-              <motion.div
+              <div
                 key={pillar.title}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
                 className="bg-gradient-to-b from-white to-gray-100 rounded-lg p-6 shadow-lg hover:shadow-xl transition-shadow duration-300"
               >
                 <div className="text-kofc-gold text-4xl mb-4">
@@ -181,7 +108,7 @@ const Home = () => {
                 <p className="text-gray-600 font-garamond">
                   {pillar.description}
                 </p>
-              </motion.div>
+              </div>
             ))}
           </div>
         </div>
@@ -190,25 +117,19 @@ const Home = () => {
       {/* Call to Action */}
       <section className="py-16 bg-gradient-to-r from-kofc-blue via-kofc-red to-kofc-gold">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
+          <h2 className="text-3xl font-trajan mb-4 text-white">
+            Join Our Brotherhood
+          </h2>
+          <p className="text-xl font-garamond mb-8 text-white">
+            Become part of a community dedicated to making a difference through faith and service.
+          </p>
+          <Link
+            to="/membership"
+            className="mt-8 inline-flex items-center text-kofc-gold hover:text-white transition-colors duration-300"
           >
-            <h2 className="text-3xl font-trajan mb-4 text-white">
-              Join Our Brotherhood
-            </h2>
-            <p className="text-xl font-garamond mb-8 text-white">
-              Become part of a community dedicated to making a difference through faith and service.
-            </p>
-            <Link
-              to="/membership"
-              className="mt-8 inline-flex items-center text-kofc-gold hover:text-white transition-colors duration-300"
-            >
-              <span className="mr-2">Join the Brotherhood</span>
-              <FaArrowRight className="h-4 w-4" />
-            </Link>
-          </motion.div>
+            <span className="mr-2">Join the Brotherhood</span>
+            <FaArrowRight className="h-4 w-4" />
+          </Link>
         </div>
       </section>
     </div>
