@@ -16,6 +16,15 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const toggleMenu = () => {
+    setIsOpen(!isOpen);
+  };
+
+  const isHome = location.pathname === '/';
+  const navbarBg = isHome && !isScrolled 
+    ? 'bg-transparent' 
+    : 'bg-kofc-blue shadow-lg';
+
   const navLinks = [
     { to: '/', text: 'Home' },
     { to: '/about', text: 'About' },
@@ -25,41 +34,24 @@ const Navbar = () => {
     { to: '/membership', text: 'Membership' }
   ];
 
-  const navbarClass = `fixed w-full z-50 transition-all duration-300 ${
-    isScrolled || location.pathname !== '/' 
-      ? 'bg-kofc-dark shadow-lg'
-      : 'bg-transparent'
-  }`;
-
   return (
-    <nav className={navbarClass}>
-      <div className="container mx-auto px-4">
-        <div className="flex justify-between items-center h-20">
-          {/* Logo */}
-          <Link to="/" className="flex items-center space-x-2">
-            <div className="relative h-16 w-16">
-              <div className="absolute inset-0 bg-gradient-to-r from-kofc-gold via-kofc-red to-kofc-blue rounded-full p-0.5">
-                <div className="w-full h-full bg-kofc-dark rounded-full overflow-hidden">
-                  <img 
-                    src="/images/kofc-logo.png" 
-                    alt="Knights of Columbus Logo" 
-                    className="h-full w-full object-contain p-2"
-                  />
-                </div>
-              </div>
-            </div>
-            <span className="text-white font-semibold text-lg hidden sm:block">
-              Council 6883
-            </span>
-          </Link>
+    <nav className={`fixed w-full z-50 transition-all duration-300 ${navbarBg}`}>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between h-20">
+          <div className="flex">
+            <Link to="/" className="flex-shrink-0 flex items-center">
+              <img className="h-12 w-auto" src="/images/kofc-logo.png" alt="Council 6883" />
+              <span className="ml-3 text-kofc-gold font-trajan text-xl">Council 6883</span>
+            </Link>
+          </div>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
+          {/* Desktop menu */}
+          <div className="hidden md:flex md:items-center md:space-x-8">
             {navLinks.map(({ to, text }) => (
               <Link
                 key={to}
                 to={to}
-                className={`text-white hover:text-kofc-gold transition-colors duration-200 ${
+                className={`text-white hover:text-kofc-gold transition-colors duration-200 font-garamond text-lg ${
                   location.pathname === to ? 'text-kofc-gold' : ''
                 }`}
               >
@@ -68,51 +60,49 @@ const Navbar = () => {
             ))}
             <Link
               to="/membership"
-              className="bg-kofc-red hover:bg-kofc-red/90 text-white px-6 py-2 rounded-full font-semibold transition-all duration-300 transform hover:scale-105"
+              className={`${
+                isHome && !isScrolled
+                  ? 'bg-kofc-red/90 hover:bg-kofc-red'
+                  : 'bg-kofc-red hover:bg-red-700'
+              } text-white px-6 py-2 rounded-md shadow-md hover:shadow-lg transition-all duration-200 font-trajan text-lg transform hover:scale-105`}
             >
               Join Us
             </Link>
           </div>
 
-          {/* Mobile Menu Button */}
-          <button
-            className="md:hidden text-white p-2"
-            onClick={() => setIsOpen(!isOpen)}
-            aria-label="Toggle menu"
-          >
-            {isOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
-          </button>
+          {/* Mobile menu button */}
+          <div className="md:hidden flex items-center">
+            <button
+              onClick={toggleMenu}
+              className="inline-flex items-center justify-center p-2 rounded-md text-kofc-gold hover:text-white focus:outline-none"
+            >
+              {isOpen ? <FaTimes className="h-6 w-6" /> : <FaBars className="h-6 w-6" />}
+            </button>
+          </div>
         </div>
+      </div>
 
-        {/* Mobile Navigation */}
-        <motion.div
-          className={`md:hidden ${isOpen ? 'block' : 'hidden'}`}
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: isOpen ? 1 : 0, y: isOpen ? 0 : -20 }}
-          transition={{ duration: 0.2 }}
-        >
-          <div className="px-2 pt-2 pb-4 space-y-1 bg-kofc-dark rounded-b-lg">
-            {navLinks.map(({ to, text }) => (
-              <Link
-                key={to}
-                to={to}
-                className={`block px-3 py-2 rounded-md text-white hover:bg-kofc-gold/20 transition-colors duration-200 ${
-                  location.pathname === to ? 'bg-kofc-gold/20' : ''
-                }`}
-                onClick={() => setIsOpen(false)}
-              >
-                {text}
-              </Link>
-            ))}
+      {/* Mobile menu */}
+      <div className={`${isOpen ? 'block' : 'hidden'} md:hidden bg-kofc-blue border-t border-kofc-gold/20`}>
+        <div className="px-2 pt-2 pb-3 space-y-1">
+          {navLinks.map(({ to, text }) => (
             <Link
-              to="/membership"
-              className="block px-3 py-2 text-center bg-kofc-red hover:bg-red-700 text-white rounded-md transition-colors duration-200"
-              onClick={() => setIsOpen(false)}
+              key={to}
+              to={to}
+              className="text-white hover:text-kofc-gold hover:bg-kofc-blue-light/10 block px-3 py-2 rounded-md font-garamond text-lg"
+              onClick={toggleMenu}
             >
-              Join Us
+              {text}
             </Link>
-          </div>
-        </motion.div>
+          ))}
+          <Link
+            to="/membership"
+            className="bg-kofc-red text-white block px-3 py-2 rounded-md hover:bg-red-700 transition-colors duration-200 font-trajan text-lg mt-4 text-center shadow-md hover:shadow-lg"
+            onClick={toggleMenu}
+          >
+            Join Us
+          </Link>
+        </div>
       </div>
     </nav>
   );

@@ -6,7 +6,6 @@
     "@google-cloud/vertexai": "^1.9.3",
     "@google/generative-ai": "^0.21.0",
     "@heroicons/react": "^2.0.18",
-    "@tailwindcss/typography": "^0.5.10",
     "framer-motion": "^10.16.4",
     "pdf-parse": "^1.1.1",
     "pdfjs-dist": "^3.11.174",
@@ -41,6 +40,7 @@
     ]
   },
   "devDependencies": {
+    "@tailwindcss/typography": "^0.5.16",
     "autoprefixer": "^10.4.16",
     "postcss": "^8.4.31",
     "tailwindcss": "^3.3.5"
