@@ -7,6 +7,7 @@ import About from './pages/About';
 import History from './pages/History';
 import Membership from './pages/Membership';
 import Gallery from './pages/Gallery';
+import Faith from './pages/Faith';
 import ScrollToTop from './components/ScrollToTop';
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
             <Route path="/history" element={<History />} />
             <Route path="/membership" element={<Membership />} />
             <Route path="/gallery" element={<Gallery />} />
+            <Route path="/faith" element={<Faith />} />
           </Routes>
         </main>
         <Footer />

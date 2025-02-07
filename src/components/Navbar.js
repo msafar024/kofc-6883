@@ -21,6 +21,7 @@ const Navbar = () => {
     { to: '/about', text: 'About' },
     { to: '/history', text: 'History' },
     { to: '/gallery', text: 'Gallery' },
+    { to: '/faith', text: 'Faith Q&A' },
     { to: '/membership', text: 'Membership' }
   ];
 
