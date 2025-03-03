@@ -96,7 +96,7 @@ const Membership = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-16 mt-16">
           <ContactCard
             title="Faculty Advisor"
-            name="Fr. Maher"
+            name="Fr. Michael Maher, S.J."
             email="michael.maher@marquette.edu"
             icon={FaCross}
             delay={0.2}
