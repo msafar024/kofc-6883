@@ -63,7 +63,7 @@ If multiple quotes are relevant, separate them with a line break. If no specific
 Question: ${question}`;
 
       const genAI = new GoogleGenerativeAI(apiKey);
-      const model = genAI.getGenerativeModel({ model: "gemini-pro" });
+      const model = genAI.getGenerativeModel({ model: "gemini-2.0-pro-exp-02-05" });
       const result = await model.generateContent(prompt);
       const response = await result.response;
       const text = response.text();
