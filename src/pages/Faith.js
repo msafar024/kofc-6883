@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { FaSearch, FaSpinner, FaCross } from 'react-icons/fa';
+import { FaSearch, FaSpinner, FaCross, FaExclamationTriangle, FaInfoCircle } from 'react-icons/fa';
 import { GoogleGenerativeAI } from '@google/generative-ai';
 import ReactMarkdown from 'react-markdown';
 
@@ -30,7 +30,14 @@ const Faith = () => {
         return;
       }
 
-      const prompt = `You are a warm and knowledgeable Catholic AI assistant. Answer questions naturally and conversationally, drawing from the Catechism of the Catholic Church.
+      const prompt = `You are a warm and knowledgeable Catholic AI assistant specifically trained to answer questions about the Catholic faith based STRICTLY on the Catechism of the Catholic Church (CCC).
+
+VERY IMPORTANT RULES:
+1. NEVER make up, hallucinate, or invent quotes from the Catechism. Only use exact quotes that you are 100% certain about.
+2. If you don't know an answer with certainty, clearly state that you cannot provide definitive information on that specific topic and suggest consulting a priest or the official Catechism.
+3. When you're uncertain about specific paragraph numbers, DO NOT guess - simply mention the general teaching without attributing a specific paragraph number.
+4. Be direct and clear in your answers - avoid being overly cautious or indirect when the Catechism is clear on a topic.
+5. Provide practical application of the teaching when appropriate to make answers more helpful and relevant.
 
 Your response will be formatted with markdown, where:
 - **Bold text** (between ** **) appears in a strong, dark color - use for headings and key terms
@@ -49,16 +56,16 @@ If someone expresses interest in abortion or mentions considering one, respond w
 Structure your response like this:
 
 ### Answer
-[Your conversational response here, using *emphasized text* for important terms and **bold** for key concepts]
+[Your direct, clear, and helpful response, using *emphasized text* for important terms and **bold** for key concepts]
 
 ---
 
 ### Relevant Catechism Quotes
-> [Quote from Catechism with paragraph number]
-> 
-> — CCC [paragraph number]
+> I believe in one God, the Father almighty, maker of heaven and earth, of all things visible and invisible.—CCC 198
 
-If multiple quotes are relevant, separate them with a line break. If no specific quote is relevant, explain why.
+Important: Always format the citation as "—CCC [paragraph number]" (with an em dash directly followed by "CCC") at the end of the quote within the same blockquote. Never put the citation in a separate blockquote.
+
+If multiple quotes are relevant, separate them with a line break. If no specific quote is relevant, explain why. NEVER invent or hallucinate quotes - only use quotes you are completely certain are from the Catechism.
 
 Question: ${question}`;
 
@@ -182,9 +189,24 @@ Question: ${question}`;
                       p: ({ node, ...props }) => (
                         <p className="mb-4" {...props} />
                       ),
-                      blockquote: ({ node, ...props }) => (
-                        <blockquote className="border-l-4 border-kofc-gold pl-4 italic text-gray-700 my-4 bg-gray-50 p-4 rounded-r-lg" {...props} />
-                      ),
+                      blockquote: ({ node, ...props }) => {
+                        // Check if this blockquote contains a CCC citation
+                        let content = "";
+                        if (node.children && node.children.length > 0) {
+                          content = node.children.map(child => {
+                            if (child.type === 'text') {
+                              return child.value;
+                            } else if (child.children) {
+                              return child.children.map(c => c.value || "").join("");
+                            }
+                            return "";
+                          }).join("");
+                        }
+                        
+                        return (
+                          <blockquote className={`border-l-4 border-kofc-gold pl-4 italic text-gray-700 my-4 bg-gray-50 p-4 rounded-r-lg ${content.includes('CCC') ? 'ccc-citation' : ''}`} {...props} />
+                        );
+                      },
                       h3: ({ node, ...props }) => (
                         <h3 className="text-xl font-trajan text-kofc-dark mt-6 mb-4" {...props} />
                       ),
@@ -269,12 +291,17 @@ Question: ${question}`;
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.4 }}
-            className="mt-8 text-center text-gray-500"
+            className="mt-8 p-4 bg-gray-50 border-l-2 border-gray-400 rounded-md"
           >
-            <p className="font-garamond">
-              Note: This feature provides answers based on the Catechism of the Catholic Church.
-              For authoritative guidance, please consult with your priest or spiritual director.
-            </p>
+            <div className="flex items-start">
+              <FaInfoCircle className="text-gray-500 mt-1 mr-3 flex-shrink-0" />
+              <div>
+                <h4 className="text-gray-700 font-semibold mb-1">Important Note</h4>
+                <p className="font-garamond text-gray-600">
+                  This feature uses an AI model that <span className="font-medium">can make mistakes</span>. While we strive for accuracy, responses are based on the Catechism of the Catholic Church but may not always be complete. For authoritative guidance, please consult with your priest or spiritual director.
+                </p>
+              </div>
+            </div>
           </motion.div>
         </div>
       </div>
