@@ -20,9 +20,11 @@ const Navbar = () => {
   };
 
   const isHome = location.pathname === '/';
-  const navbarBg = isHome && !isScrolled 
-    ? 'bg-transparent' 
+  // Transparent with no shadow at top of home, solid bg and shadow otherwise
+  const navbarBg = isHome && !isScrolled
+    ? 'bg-transparent'
     : 'bg-kofc-blue shadow-lg';
+  const navbarShadow = isHome && !isScrolled ? '' : 'shadow-lg';
 
   const navLinks = [
     { to: '/', text: 'Home' },
@@ -35,7 +37,7 @@ const Navbar = () => {
   ];
 
   return (
-    <nav className={`fixed w-full z-50 transition-all duration-300 ${navbarBg}`}>
+    <nav className={`fixed w-full z-50 transition-all duration-300 backdrop-blur-lg ${navbarBg} ${navbarShadow} ${(isHome && !isScrolled) ? 'navbar-transparent' : ''}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-20">
           <div className="flex">

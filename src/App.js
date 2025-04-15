@@ -10,15 +10,17 @@ import Gallery from './pages/Gallery';
 import Faith from './pages/Faith';
 import Directory from './pages/Directory'; // Import the new Directory page
 import ScrollToTop from './components/ScrollToTop';
+import { useLocation } from 'react-router-dom';
 
 function App() {
+  const location = useLocation();
+  const isHome = location.pathname === '/';
   return (
-    <Router>
-      <ScrollToTop />
+    <>
       <div className="flex flex-col min-h-screen">
         <Navbar />
-        {/* Add pt-20 to offset the fixed navbar height (h-20) */}
-        <main className="flex-grow pt-20">
+        {/* Add pt-20 to offset the fixed navbar height (h-20) only on non-home pages */}
+        <main className={`flex-grow${isHome ? '' : ' pt-20'}`}>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
@@ -31,7 +33,7 @@ function App() {
         </main>
         <Footer />
       </div>
-    </Router>
+    </>
   );
 }
 
