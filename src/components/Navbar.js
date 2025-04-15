@@ -30,6 +30,7 @@ const Navbar = () => {
     { to: '/history', text: 'History' },
     { to: '/gallery', text: 'Gallery' },
     { to: '/faith', text: 'Faith Q&A' },
+    { to: '/directory', text: 'Directory' }, // Add Directory link
     { to: '/membership', text: 'Membership' }
   ];
 
@@ -46,7 +47,7 @@ const Navbar = () => {
 
           {/* Desktop menu */}
           <div className="hidden md:flex md:items-center md:space-x-8">
-            {navLinks.map(({ to, text }) => (
+            {navLinks.filter(link => link.text !== 'Membership').map(({ to, text }) => ( // Exclude Membership from main links
               <Link
                 key={to}
                 to={to}
@@ -57,6 +58,7 @@ const Navbar = () => {
                 {text}
               </Link>
             ))}
+            {/* Move Membership (Join Us) button to the end */}
             <Link
               to="/membership"
               className={`${
@@ -84,7 +86,7 @@ const Navbar = () => {
       {/* Mobile menu */}
       <div className={`${isOpen ? 'block' : 'hidden'} md:hidden bg-kofc-blue border-t border-kofc-gold/20`}>
         <div className="px-2 pt-2 pb-3 space-y-1">
-          {navLinks.map(({ to, text }) => (
+          {navLinks.filter(link => link.text !== 'Membership').map(({ to, text }) => ( // Exclude Membership from main links
             <Link
               key={to}
               to={to}
@@ -94,6 +96,7 @@ const Navbar = () => {
               {text}
             </Link>
           ))}
+          {/* Move Membership (Join Us) button to the end */}
           <Link
             to="/membership"
             className="bg-kofc-red text-white block px-3 py-2 rounded-md hover:bg-red-700 transition-colors duration-200 font-trajan text-lg mt-4 text-center shadow-md hover:shadow-lg"
